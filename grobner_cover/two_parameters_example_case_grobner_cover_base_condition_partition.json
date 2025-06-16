@@ -1,0 +1,52 @@
+[
+    {
+        "basis": [
+            "lambda2^2+lambda2",
+            "lambda1^2+(f11^2+f12^2)*lambda1",
+            "x4*lambda2+x4",
+            "x4^2+lambda2",
+            "x3*lambda2",
+            "x3*x4",
+            "x3^2-lambda2-1",
+            "(f11^4+2*f11^2*f12^2+f12^4)*x2^2+(-f11^2+f12^2)*lambda1+(-f11^4-f11^2*f12^2)",
+            "(f11*f12)*x1+x2*lambda1+(f12^2)*x2"
+        ],
+        "conditions": "Ne(f11**3*f12 + f11*f12**3, 0)"
+    },
+    {
+        "basis": [
+            "1"
+        ],
+        "conditions": "(Ne(f11, 0) & Eq(f11**2 + f12**2, 0)) | (Ne(f12, 0) & Eq(f11**2 + f12**2, 0))"
+    },
+    {
+        "basis": [
+            "lambda2^2+lambda2",
+            "lambda1",
+            "x4*lambda2+x4",
+            "x4^2+lambda2",
+            "x3*lambda2",
+            "x3*x4",
+            "x3^2-lambda2-1",
+            "x1^2+x2^2-1"
+        ],
+        "conditions": "Eq(f11, 0) & Eq(f12, 0) & Ne(1, 0)"
+    },
+    {
+        "basis": [
+            "lambda2^2+lambda2",
+            "lambda1^2+(f11^2+f12^2)*lambda1",
+            "x4*lambda2+x4",
+            "x4^2+lambda2",
+            "x3*lambda2",
+            "x3*x4",
+            "x3^2-lambda2-1",
+            "(f11+f12)*x2*lambda1+(f12^3)*x2",
+            "(f11^3+f12^3)*x2^2+(-f11+f12)*lambda1+(-f11^3)",
+            "(f11+f12)*x1*lambda1+(f11^3)*x1",
+            "x1*x2",
+            "(f11^3+f12^3)*x1^2+(f11-f12)*lambda1+(-f12^3)"
+        ],
+        "conditions": "(Ne(f11, 0) & Eq(f11*f12, 0)) | (Ne(f12, 0) & Eq(f11*f12, 0))"
+    }
+]

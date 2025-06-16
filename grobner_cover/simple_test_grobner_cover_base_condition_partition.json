@@ -1,0 +1,21 @@
+[
+    {
+        "basis": [
+            "(a2)*y2+(-a2-2a)*y+(a+b+1)",
+            "x+(a)*y-1"
+        ],
+        "conditions": "Ne(a, 0)"
+    },
+    {
+        "basis": [
+            "1"
+        ],
+        "conditions": "Eq(a, 0) & Ne(b, -1)"
+    },
+    {
+        "basis": [
+            "x-1"
+        ],
+        "conditions": "Eq(a, 0) & Eq(b, -1)"
+    }
+]

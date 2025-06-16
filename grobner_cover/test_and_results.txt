@@ -1,0 +1,57 @@
+======================================================
+Test Summary and Results: Grobner Cover Computation
+======================================================
+
+This file documents the results of multiple experiments conducted  
+using the Grobner Cover computation pipeline.
+
+------------------------------------------------------
+1. Latest Experiment (3 Parameters)
+------------------------------------------------------
+
+• Runtime: ~36 hours  
+• Peak Memory Usage: ~180 GB  
+• Result: Unexpected system reset before completion.
+
+Although the program was terminated due to a system reset, it is  
+important to note that **given sufficient memory and time, a result  
+will eventually be found**. This is guaranteed by the algorithm  
+implemented in `grobcov.lib`, which is based on the  
+**Grobner Cover algorithm by Montes (1999)** — an algorithm known  
+to terminate.
+
+It’s likely that the reset was unrelated to memory limits, since the  
+`limits_stats.py` monitor was running throughout. However, the tested  
+version of the code **did not include a file-write command**, meaning  
+the result may have been lost even if it had completed successfully.  
+While this is speculative, it cannot be ruled out.
+
+------------------------------------------------------
+2. Performance Insights
+------------------------------------------------------
+
+From the 3-parameter case onward, the **conditions that define each  
+Grobner basis region become equation systems themselves**, which in  
+my opinion is the main reason for the dramatic increase in computation  
+time compared to the simpler 2-parameter case that can be solved  
+quickly and returns linear conditions.
+
+Because of this, **after a result is found there would be a need to  
+solve all the conditions for fast access**, though that would be quite  
+simple since all of them are just polynomial equation systems.
+
+------------------------------------------------------
+3. Results
+------------------------------------------------------
+
+• **2 Parameters:**  
+  Example results available in `grobner_cover_2_parameters.json`
+
+• **3 Parameters:**  
+  Not successfully completed.  
+  Ran for 36 hours, used 180 GB of memory. Unexpected system reset  
+  occurred before result was saved.  
+  Root cause undetermined, likely not memory exhaustion.
+
+• **>3 Parameters:**  
+  Untested. Expected to require even more memory and time.

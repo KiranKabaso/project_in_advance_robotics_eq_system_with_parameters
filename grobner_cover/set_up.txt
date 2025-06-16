@@ -1,0 +1,87 @@
+======================================================
+Setup Instructions: Grobner Cover of Equation System
+======================================================
+
+This project computes the **Grobner Cover** of a parametric equation system using SageMath and Singular. It also monitors system memory usage in parallel.
+
+To run the project, you must launch:
+
+  • find_grobner_cover.py — in SageMath  
+  • limits_stats.py       — in Python (any version, with hardcoded PID)
+
+------------------------------------------------------
+1. System Requirements
+------------------------------------------------------
+
+• OS: Linux or WSL2 (Windows Subsystem for Linux 2)  
+• SageMath installed and available via `sage` in terminal  
+• Python installed (version 3 recommended, but not strictly required)  
+• **At least 250 GB of total memory (RAM + SWAP)** is required for systems with three parameters
+
+------------------------------------------------------
+2. Memory & Swap Configuration (Required)
+------------------------------------------------------
+
+If the total memory (RAM + swap) is below 250 GB, the process may be terminated unexpectedly due to out-of-memory errors.
+
+**For WSL2:**
+
+1. Edit the file: `C:\Users\<YourName>\.wslconfig`
+
+Example contents:  
+[wsl2]  
+memory=32GB  
+swap=256GB
+
+2. Apply changes:  
+wsl --shutdown
+
+**For native Linux:**
+
+Create a 256 GB swapfile:  
+sudo fallocate -l 256G /swapfile  
+sudo chmod 600 /swapfile  
+sudo mkswap /swapfile  
+sudo swapon /swapfile  
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+
+Verify with:  
+free -h
+
+**Recommended:**  
+Increase the system's swap usage preference to encourage early swapping, which helps prevent crashes during heavy computation:  
+```bash
+echo 80 | sudo tee /proc/sys/vm/swappiness
+
+------------------------------------------------------
+3. Running the Grobner Cover Program
+------------------------------------------------------
+
+Open **two terminal windows**.
+
+In the first terminal, run the Grobner Cover computation in the background and write down the process ID (PID):  
+sage find_grobner_cover.py &  
+echo $!     # prints the PID of the process
+
+Then, open `limits_stats.py` in a text editor and set the PID manually at the top of the file:  
+PID: int = <your_pid_here>
+
+In the second terminal, run the memory monitor:  
+python limits_stats.py
+
+Both scripts must remain running during the entire computation.
+
+------------------------------------------------------
+4. Customizing the Equation System
+------------------------------------------------------
+
+To analyze a different parametric system instead of the default (3 parameters):
+
+1. Open `find_grobner_cover.py` in your editor.  
+2. Locate the function:
+   ```python
+   def create_equations():
+       # currently hardcoded system definitions
+       ...
+3.Replace the hardcoded polynomial definitions with your desired equations.
+4.Save the file and re-run the commands from section 3.
